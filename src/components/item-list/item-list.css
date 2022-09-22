@@ -1,5 +1,6 @@
 .item-list {
     margin-left: 10px;
+    margin-bottom: 15px;
 }
 .item-list > .list-group-item {
     cursor: pointer;

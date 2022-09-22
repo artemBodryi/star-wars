@@ -8,9 +8,13 @@ import ErrorButton from '../error-button/error.button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
 
+import SwapiService from '../../services/swapi-service';
+
 import './app.css';
 
 export default class App extends Component {
+
+  swapiService = new SwapiService();
 
     state = {
       showRandomPlanet: true,
@@ -39,23 +43,21 @@ export default class App extends Component {
         <RandomPlanet/> :
         null;
   
-      return (
-        <div className="stardb-app">
-          <Header />
-          { planet }
+    return (
+      <div className="stardb-app">
+        <Header />
+        { planet }
   
-          <div className="row mb2 button-row">
-            <button
-              className="toggle-planet btn btn-warning btn-lg"
-              onClick={this.toggleRandomPlanet}>
-              Toggle Random Planet
-            </button>
-            <ErrorButton />
-          </div>
-  
-          <PeoplePage />
-  
+        <div className="row mb2 button-row">
+          <button
+            className="toggle-planet btn btn-warning btn-lg"
+            onClick={this.toggleRandomPlanet}>
+            Toggle Random Planet
+          </button>
+          <ErrorButton />
         </div>
-      );
-    }
+        <PeoplePage />
+      </div>
+    );
   }
+}
