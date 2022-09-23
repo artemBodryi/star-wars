@@ -3,8 +3,7 @@ import { React,  Component } from 'react';
 import ErrorBoundary from '../error-boudary/error-boundary';
 import Row from '../row';
 import ItemList from '../item-list/item-list';
-import PersonDetails from '../person-details/person-details';
-import ErrorIndicator from '../error-indicator/error-indicator';
+import ItemDetails from '../item-details/item-details';
 import SwapiService from '../../services/swapi-service';
 
 import './people-page.css';
@@ -14,7 +13,7 @@ export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedPerson: 3,
+    selectedPerson: 11,
   };
 
   
@@ -43,7 +42,7 @@ export default class PeoplePage extends Component {
 
     const personDetails = (
       <ErrorBoundary>
-        <PersonDetails personId={this.state.selectedPerson} />
+        <ItemDetails itemId={this.state.selectedPerson} />
       </ErrorBoundary>
     );
 
