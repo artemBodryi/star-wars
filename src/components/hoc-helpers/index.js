@@ -1,4 +1,4 @@
-import withData from './hoc-helpers';
+import withData from './with-data';
 
 export {
     withData

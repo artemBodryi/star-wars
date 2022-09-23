@@ -16,17 +16,11 @@ export default class PeoplePage extends Component {
     selectedPerson: 11,
   };
 
-  
-
   onPersonSelected = (selectedPerson) => {
     this.setState({ selectedPerson });
   };
 
   render() {
-
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
 
     const itemList = (
       <ItemList 
