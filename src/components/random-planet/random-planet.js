@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-
+import PropTypes from 'prop-types';
 import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner'
 import SwapiService from '../../services/swapi-service';
@@ -8,23 +8,13 @@ import './random-planet.css';
 
 export default class RandomPlanet extends Component {
 
-//the same like RandomPlanet.defaultProps
   static defaultProps = {
-    updateInterval: 10000 
-  }
+    updateInterval: 10000
+  };
 
-  //if upateInterval would be NAN this catch would work
   static propTypes = {
-    updateInterval: (props, propName, componentName) => {
-      const value = props[propName];
-
-      if(typeof value === 'number' && !isNaN(value)) {
-        return null;
-      }
-
-      return new TypeError(`${componentName}: ${propName} must be number`); 
-    }
-  }
+    updateInterval: PropTypes.number
+  };
 
   swapiService = new SwapiService();
 
@@ -59,7 +49,7 @@ export default class RandomPlanet extends Component {
   };
 
   updatePlanet = () => {
-    const id = Math.floor(Math.random()*15) + 2;
+    const id = Math.floor(Math.random()*17) + 2;
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
