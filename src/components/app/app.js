@@ -5,19 +5,35 @@ import RandomPlanet from "../random-planet";
 import ErrorBoundary from "../error-boudary/error-boundary";
 import SwapiService from "../../services/swapi-service";
 import DummySwapiService from "../../services/dummy-swapi-service";
-
-import { PeoplePage, PlanetPage, StarshipPage } from "../pages";
+import {Redirect, Switch} from "react-router";
+import {
+  PeoplePage,
+  PlanetPage,
+  StarshipPage,
+  LoginPage,
+  SecretPage,
+} from "../pages";
 import { SwapiServiceProvider } from "../swapi-service-context";
 
 import "./app.css";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 import { StarshipDetails } from "../sw-components";
-
 
 export default class App extends Component {
   state = {
     swapiService: new SwapiService(),
+    isLoggedIn: false,
+  };
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true,
+    });
   };
 
   onServiceChange = () => {
@@ -31,6 +47,7 @@ export default class App extends Component {
   };
 
   render() {
+    const { isLoggedIn } = this.state;
     //Component Link use history Api from browser for refreshing the page
 
     //We using Link because it not reload full page as like "a"
@@ -43,21 +60,41 @@ export default class App extends Component {
               <Header onServiceChange={this.onServiceChange} />
               <RandomPlanet />
               <Routes>
-                <Route path="/" render={() => <h2>Welcome to Star DB</h2>} />
-                <Route path="/people" element={<PeoplePage />} />
-                <Route path="/planets" element={<PlanetPage />} />
-                <Route path="/starship" element={<StarshipPage />} />
-                
-                //dynamic math for react router
-                <Route
-                  path="/starship/:id"
-                  element={<StarshipDetails />}
-                  render={({ match }) => {
-                    const { id } = match.params;
-                    return <StarshipDetails itemId={id} />;
-                  }}
-                  exact 
-                />
+                <Switch>
+                  <Route
+                    path="/"
+                    render={() => <h2>Welcome to Star DB</h2>}
+                    exact
+                  />
+                  <Route path="/people/:id" element={<PeoplePage />} />
+                  <Route path="/planets" element={<PlanetPage />} />
+                  <Route path="/starship" element={<StarshipPage />} />
+                  //dynamic math for react router
+                  <Route
+                    path="/starship/:id?"
+                    element={<StarshipDetails />}
+                    render={({ match }) => {
+                      const { id } = match.params;
+                      return <StarshipDetails itemId={id} />;
+                    }}
+                    exact
+                  />
+                  <Route
+                    path="/login"
+                    render={() => (
+                      <LoginPage
+                        i
+                        sLoggedIn={isLoggedIn}
+                        onLogin={this.onLogin}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/secret"
+                    render={() => <SecretPage isLoggedIn={isLoggedIn} />}
+                  />
+                  <Redirect to="/" />
+                </Switch>
               </Routes>
             </div>
           </Router>
