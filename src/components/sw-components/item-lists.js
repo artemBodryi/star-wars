@@ -17,7 +17,7 @@ const renderModelAndName = ({ model, name }) => (
 
 const mapPersonMethodsToProps = (swapiService) => {
   return {
-    getData: swapiService.getAllPeople,
+    getData: swapiService.getAllPeople
   };
 };
 

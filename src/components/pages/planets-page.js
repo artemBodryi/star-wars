@@ -3,7 +3,7 @@ import Row from '../row';
 import {  PlanetDetails, PlanetList } from '../sw-components'
 
 
-export default class PlanetPage extends Component {
+export default class PlanesPage extends Component {
     state = {
         selectedItem : null
     }

@@ -1,13 +1,15 @@
-import { React, Component } from "react";
+import React, { Component } from "react";
 
-import ErrorButton from "../error-button/error.button";
+import ErrorButton from '../error-button/error.button';
+
 import "./item-details.css";
+
 
 const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}</span>
-      <span>{item[field]}</span>
+      <span>{item [field]}</span>
     </li>
   );
 };
